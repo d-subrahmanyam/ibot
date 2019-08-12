@@ -1,6 +1,7 @@
-# Getting Started
+# iBot
 
-This is a slack bot built using Spring Boot and [jslack](https://github.com/d-subrahmanyam/jslack). 
+This is a slack bot built using Spring Boot and [jslack](https://github.com/seratch/jslack). 
+
 
 # How to run the application?
 

@@ -6,6 +6,8 @@ import com.github.seratch.jslack.api.methods.response.chat.ChatPostMessageRespon
 import com.github.seratch.jslack.app_backend.events.handler.AppHomeOpenedHandler;
 import com.github.seratch.jslack.app_backend.events.payload.AppHomeOpenedPayload;
 import com.subbu.ibot.utils.SlackConfiugration;
+import com.subbu.ibot.utils.SlackConfiugrationLocal;
+import com.subbu.ibot.utils.SlackTemplateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -25,7 +27,8 @@ public class IBotAppHomeOpenedHandler extends AppHomeOpenedHandler implements Sl
                     ChatPostMessageRequest.builder()
                             .token(accessToken)
                             .channel(appHomeOpenedPayload.getEvent().getChannel())
-                            .text("Let's change the world!!!")
+                            .blocksAsString(SlackTemplateUtils.getTemplate("payload-welcome.json"))
+                            .mrkdwn(true)
                             .build()
             );
         } catch (IOException ioe) {

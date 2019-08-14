@@ -3,7 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=java,macos,maven,gradle,eclipse,intellij+all
 
 ### ignore local files ###
-*-local*
+*local*
 
 ### Eclipse ###
 .metadata

@@ -4,11 +4,6 @@ logging:
     com.subbu.ibot: DEBUG
     com.github.seratch: DEBUG
 
-ibot:
-  slack:
-    accessToken: <please put your accessToken here>
-    botAccessToken: <please put your botAccessToken here>
-    signingSecret: <please put your signingSecret here>
 
 management:
   endpoints:

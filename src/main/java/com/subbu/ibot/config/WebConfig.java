@@ -1,23 +1,24 @@
 package com.subbu.ibot.config;
 
 import com.github.seratch.jslack.Slack;
-import com.subbu.ibot.web.servlets.IBotServlet;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import com.github.seratch.jslack.springboot.web.filters.SlackEventFilter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.http.HttpServlet;
 
 @Configuration
-public class WebConfig {
+@Slf4j
+public class WebConfig implements WebMvcConfigurer {
 
     @Bean
-    public ServletRegistrationBean<HttpServlet> iBotServlet() {
-        ServletRegistrationBean<HttpServlet> servletServletRegistrationBean = new ServletRegistrationBean<>();
-        servletServletRegistrationBean.setServlet(new IBotServlet());
-        servletServletRegistrationBean.addUrlMappings("/ibot/*");
-        servletServletRegistrationBean.setLoadOnStartup(1);
-        return servletServletRegistrationBean;
+    public FilterRegistrationBean<SlackEventFilter> slackEventFilterFilterRegistrationBean(){
+        FilterRegistrationBean<SlackEventFilter>  slackEventFilterFilterRegistrationBean = new FilterRegistrationBean<>();
+        slackEventFilterFilterRegistrationBean.addUrlPatterns("/ibot");
+        slackEventFilterFilterRegistrationBean.setFilter(new SlackEventFilter());
+        return slackEventFilterFilterRegistrationBean;
     }
 
     @Bean

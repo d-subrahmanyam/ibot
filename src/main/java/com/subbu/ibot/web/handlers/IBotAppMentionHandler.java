@@ -1,29 +1,36 @@
 package com.subbu.ibot.web.handlers;
 
+import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.methods.request.chat.ChatPostMessageRequest;
 import com.github.seratch.jslack.api.methods.response.chat.ChatPostMessageResponse;
 import com.github.seratch.jslack.app_backend.events.handler.AppMentionHandler;
 import com.github.seratch.jslack.app_backend.events.payload.AppMentionPayload;
-import com.subbu.ibot.utils.SlackConfiugration;
+import com.github.seratch.jslack.springboot.annotations.SlackEvent;
+import com.subbu.ibot.config.AppProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
 @Slf4j
-public class IBotAppMentionHandler extends AppMentionHandler implements SlackConfiugration {
+@SlackEvent
+public class IBotAppMentionHandler extends AppMentionHandler {
+
+    @Autowired
+    private Slack slack;
+
+    @Autowired
+    private AppProperties appProperties;
 
     @Override
     public void handle(AppMentionPayload appMentionPayload) {
         log.debug("appMentionPayload - {}", appMentionPayload.toString());
         try {
-            if (slack == null) {
-                log.debug("seems like the slack instance hasnt been initialized");
-            }
             ChatPostMessageResponse chatPostMessageResponse = slack.methods().chatPostMessage(
                     ChatPostMessageRequest.builder()
-                            .token(accessToken)
+                            .token(appProperties.getAccessToken())
                             .channel(appMentionPayload.getEvent().getChannel())
                             .text("Hola!!!")
                             .build()

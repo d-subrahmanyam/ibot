@@ -17,6 +17,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.env
 
 # External tool builders
 .externalToolBuilders/
@@ -245,3 +246,10 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/java,macos,maven,gradle,eclipse,intellij+all
+.env
+src/main/java/com/subbu/ibot/components/
+src/main/java/com/subbu/ibot/models/
+src/main/java/com/subbu/ibot/repos/
+src/main/java/com/subbu/ibot/services/
+src/main/resources/static/
+src/main/resources/templates/
